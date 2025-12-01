@@ -1,36 +1,42 @@
+### --------------------------------------------------
+### 7.5 Problem 5: Password strength classifier
+### --------------------------------------------------
 """
 Descripción:
-Dado el nombre completo de una persona en una sola cadena (por ejemplo: "juan carlos tovar"), el programa debe:
-1) Normalizar el texto (strip, espacios extra, mayúsculas/minúsculas).
-2) Mostrar el nombre formateado en Title Case y las iniciales (por ejemplo: J.C.T.).
+Clasifica una contraseña como "weak", "medium" o "strong" según reglas mínimas (puedes afinarlas, 
+pero documéntalas en los comentarios).
 
-Validaciones:
-YA - full_name no debe estar vacío después de strip().
-YA - Debe contener al menos dos palabras (por ejemplo, nombre y apellido).
-YA - No aceptar cadenas que sean solo espacios.
-"""
-# Operaciones clave sugeridas: strip(), split(), title(), concatenación, len().
-"""
-strip: quita espacios
-split: separa un string en lista
-title: mayusculas al principio
-len: longitud pseint pero en python
-"""
-print(f"\n ------------- PROBLEM 1 -------------")
-name_input = input(f"Tell me your name: ")
-name_list = name_input.split()
+Ejemplo de reglas:
+YA - Weak: longitud < 8 o todo en minúsculas o muy simple.
+YA - Medium: longitud >= 8 y mezcla de letras (mayúsculas/minúsculas) o dígitos.
+- Strong: longitud >= 8 y contiene al menos:
+  - una letra mayúscula,
+  - una letra minúscula,
+  - un dígito,
+  - un símbolo no alfanumérico (por ejemplo, !, @, #, etc.).
 
-if len(name_list) == 0:
-    print("Characters not found.")
-elif len(name_list) < 2:
-    print("At least a first and last name.")
-else:
-    full_name = " ".join(name_list)
-    initials= []
-    for word in name_list:
-        initials.append(word[0].title())  
-    
-    result = ". ".join(initials)
-    print(f"Formatted name: {full_name.title()}")
-    print(f"Initials: {result}.")
-    
+  Operaciones clave sugeridas:
+- Recorrer carácter por carácter.
+- Métodos: isupper(), islower(), isdigit(), isalnum().
+- Uso de banderas booleanas (has_upper, has_lower, etc.).
+
+list()
+"""
+password_input = input(f"Set a password to evalue: ")
+# Separar la contraseña dada en una lista
+letter_list = list(password_input)
+
+# Verificar si hay algo d esto
+has_upper = any(letter.isupper() for letter in letter_list)
+has_digit = any(letter.isdigit() for letter in letter_list)
+validation_medium_list = [has_upper, has_digit]
+validation_medium = any(validation_list)
+
+
+# MEDIUM
+if len(password_input) >= 8 and validation_medium == True:
+    print("medium") 
+
+# WEAK
+elif len(password_input) < 8 or password_input.islower() == True:
+    print("weak")

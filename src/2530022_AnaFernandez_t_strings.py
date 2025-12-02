@@ -138,12 +138,102 @@ print(f"\n ------------- PROBLEM 4 -------------")
 phrase_input = input(f"Enter sentence: ")
 phrase_list = phrase_input.split()
 
-longest_word = max(phrase_list, key=len)
-shortest_word = min(phrase_list, key=len)
+if len(phrase_input) == 0:
+    print("Character not found")
+else: 
+    longest_word = max(phrase_list, key=len)
+    shortest_word = min(phrase_list, key=len)
 
-print(f"Total number of words: {len(phrase_list)}")
-print(f"First word in sentence: {phrase_list[0]}")
-print(f"Last word in sentence: {phrase_list[-1]}")
-print(f"Longest word: {longest_word}")
-print(f"Shortest word: {shortest_word}")
+    print(f"Total number of words: {len(phrase_list)}")
+    print(f"First word in sentence: {phrase_list[0]}")
+    print(f"Last word in sentence: {phrase_list[-1]}")
+    print(f"Longest word: {longest_word}")
+    print(f"Shortest word: {shortest_word}")
+    print()
+
+### --------------------------------------------------
+### 7.5 Problem 5: Password strength classifier
+### --------------------------------------------------
+"""
+Descripción:
+Clasifica una contraseña como "weak", "medium" o "strong" según reglas mínimas (puedes afinarlas, 
+pero documéntalas en los comentarios).
+
+Ejemplo de reglas:
+- Weak: longitud < 8 o todo en minúsculas o muy simple.
+- Medium: longitud >= 8 y mezcla de letras (mayúsculas/minúsculas) o dígitos.
+- Strong: longitud >= 8 y contiene al menos:
+  - una letra mayúscula,
+  - una letra minúscula,
+  - un dígito,
+  - un símbolo no alfanumérico (por ejemplo, !, @, #, etc.).
+"""
+## Operaciones clave sugeridas:
+## Recorrer carácter por carácter. 
+## - Métodos: isupper(), islower(), isdigit(), isalnum(). 
+## - Uso de banderas booleanas (has_upper, has_lower, etc.).
+
+print(f"\n ------------- PROBLEM 5 -------------")
+password_input = input(f"Set a password to evalue: ")
+# Separar la contraseña dada en una lista
+letter_list = list(password_input)
+
+# Verificar si hay algo d esto
+has_upper = any(letter.isupper() for letter in letter_list)
+has_lower = any(letter.islower() for letter in letter_list)
+has_digit = any(letter.isdigit() for letter in letter_list)
+has_noalnum = any(not letter.isalnum() for letter in letter_list)
+
+all_lower = all(letter.islower() for letter in letter_list)
+all_upper = all(letter.isupper() for letter in letter_list)
+all_digit = all(letter.isdigit()  for letter in letter_list)
+all_noalnum = all(not letter.isalnum() for letter in letter_list)
+
+# Lista de todo lo verificable
+verify_list = [has_upper, has_lower, has_digit, has_noalnum]
+verify_all = [all_lower, all_upper, all_digit, all_noalnum]
+
+# Strong - Medium - Weak
+if  len(password_input) >= 8 and all(verify_list) == True:
+  print("Strong")
+
+elif len(password_input) < 8 or any(verify_all) == True:
+  print("Weak")
+
+elif len(password_input) >= 8 and any(verify_list) == True:
+  print("Medium")
+
+
 print()
+
+### --------------------------------------------------
+### 7.6 Problem 6: Product label formatter (fixed-width text)
+### --------------------------------------------------
+"""
+Descripción:
+Dado el nombre de un producto y su precio, genera una etiqueta en una sola línea con el siguiente formato:
+
+Product: <NAME> | Price: $<PRICE>
+
+La cadena completa debe tener exactamente 30 caracteres:
+- Si es más corta, rellena con espacios al final.
+- Si es más larga, recorta hasta 30 caracteres.
+""" 
+
+## Operaciones clave sugeridas:
+## - Uso de f-strings o concatenación para formar la etiqueta base.
+## - len() para medir la longitud.
+## - slicing para recortar: label[:30].
+## - Relleno con espacios hasta alcanzar 30 caracteres.
+
+print(f"\n ------------- PROBLEM 6 -------------")
+product_name = input(f"Product name: ")
+price_value = input(f"Product price: ")
+normalized_name = product_name.strip()
+
+if len(normalized_name) < 30:
+    normalized_name = normalized_name.ljust(30)
+else:
+    normalized_name = normalized_name[:30]
+
+print(f"Product: {normalized_name.title()} | Price: ${price_value}")

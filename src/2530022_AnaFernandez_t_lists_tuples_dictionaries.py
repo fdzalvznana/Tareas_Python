@@ -1,3 +1,24 @@
+#### PORTADA
+"""
+Ana Fernanda Sofia Fernandez Alvarez
+2530022
+IM 1-1
+"""
+#### RESUMEN
+"""
+En Python, una lista, una tupla y un diccionario son estructuras de datos: las listas y tuplas guardan elementos ordenados,
+pero las listas son mutables (se pueden modificar) mientras que las tuplas son inmutables 
+(no cambian una vez creadas).
+
+Un diccionario almacena pares clave–valor, permitiendo acceder a la información 
+mediante una clave en lugar de un índice.
+La mutabilidad de las listas facilita agregar, quitar o editar datos, 
+mientras que la inmutabilidad de las tuplas ofrece seguridad y estabilidad.
+
+Los diccionarios se usan para asociar información, como nombres con teléfonos o productos con precios.
+El documento cubrirá la descripción de cada problema, el diseño de entradas y salidas, las validaciones aplicadas
+y el uso de listas, tuplas y diccionarios en contextos prácticos como catálogos, registros y estadísticas.
+"""
 ### --------------------------------------------------
 ### 7.1 Problem 1: Shopping list basics (list operations)
 ### --------------------------------------------------
@@ -34,6 +55,52 @@ print(f"Total items: {len_list}")
 print(f"Found item: {is_in_list}")
 print()
 
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE Y ERROR)
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       Enter initial items: apple, banana, pear
+       Enter new item: mango
+       Enter item to search: banana
+   Análisis:
+       items_list = ["apple","banana","pear","mango"]
+       search_item = "banana" → True
+   Salida esperada:
+       Items list: ['apple', 'banana', 'pear', 'mango']
+       Total items: 4
+       Found item: True
+
+
+2) Caso Borde (lista inicial vacía)
+   Entrada:
+       Enter initial items:
+       Enter new item: chips
+       Enter item to search: chips
+   Análisis:
+       initial empty → items_list = []
+       luego append("chips") → ["chips"]
+       search_item = "chips" → True
+   Salida esperada:
+       Items list: ['chips']
+       Total items: 1
+       Found item: True
+
+
+3) Caso Error / Límite (buscar un elemento que no existe)
+   Entrada:
+       Enter initial items: milk, bread
+       Enter new item: eggs
+       Enter item to search: cheese
+   Análisis:
+       items_list = ["milk", "bread", "eggs"]
+       "cheese" no está → False
+   Salida esperada:
+       Items list: ['milk', 'bread', 'eggs']
+       Total items: 3
+       Found item: False
+"""
 ### --------------------------------------------------
 ### 7.2 Problem 2: Points and distances with tuples
 ### --------------------------------------------------
@@ -77,7 +144,53 @@ print(f"Point B: {point_b}")
 print(f"Distance: {distance}")
 print(f"Midpoint: {midpoint}")
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE, ERROR)
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       x1 = 0
+       y1 = 0
+       x2 = 3
+       y2 = 4
+   Análisis:
+       distance = 5
+       midpoint = (1.5, 2.0)
+   Salida esperada:
+       Point A: (0.0, 0.0)
+       Point B: (3.0, 4.0)
+       Distance: 5.0
+       Midpoint: (1.5, 2.0)
 
+
+2) Caso Borde (puntos iguales → distancia 0)
+   Entrada:
+       x1 = 2
+       y1 = 2
+       x2 = 2
+       y2 = 2
+   Análisis:
+       distance = 0
+       midpoint = (2, 2)
+   Salida esperada:
+       Point A: (2.0, 2.0)
+       Point B: (2.0, 2.0)
+       Distance: 0.0
+       Midpoint: (2.0, 2.0)
+
+
+3) Caso Error (entrada no numérica)
+   Entrada:
+       x1 = 1
+       y1 = abc
+       x2 = 5
+       y2 = 6
+   Razón:
+       "abc" no pasa el .isdigit() modificado
+   Salida esperada:
+       Error: invalid input
+"""
 ### --------------------------------------------------
 ### 7.3 Problem 3: Product catalog with dictionary
 ### --------------------------------------------------
@@ -132,7 +245,50 @@ else:
     except ValueError:
         print("Error: invalid input")
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE, ERROR)
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       Producto: apple
+       Cantidad: 3
+   Análisis:
+       unit_price = 10.0
+       total = 30.0
+   Salida esperada:
+       Unit price: 10.0
+       Quantity: 3
+       Total: 30.0
 
+
+2) Caso Borde (cantidad = 1, mínimo válido)
+   Entrada:
+       Producto: milk
+       Cantidad: 1
+   Análisis:
+       unit_price = 23.0
+       total = 23.0
+   Salida esperada:
+       Unit price: 23.0
+       Quantity: 1
+       Total: 23.0
+
+
+3) Caso Error (producto inexistente)
+   Entrada:
+       Producto: chocolate
+       Cantidad: 2
+   Salida esperada:
+       Error: product not found
+
+--- Otro error válido ---
+   Entrada:
+       Producto: apple
+       Cantidad: -5
+   Salida esperada:
+       Error: invalid input
+"""
 ### --------------------------------------------------
 ### 7.4 Problem 4: Student grades with dict and list
 ### --------------------------------------------------
@@ -182,7 +338,33 @@ else:
             print("Average:", average)
             print("Passed:", str(is_passed).lower())
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE, ERROR)
+# ------------------------------------------------------------
+"""
+------------- PROBLEM 4 -------------
+Caso 1: NORMAL
+Input:
+    Estudiante: fulanito
+Output esperado:
+    Grades: [90.0, 85.5, 88.0]
+    Average: 87.83333333333333
+    Passed: true
 
+------------- PROBLEM 4 -------------
+Caso 2: ERROR (nombre no existe)
+Input:
+    Estudiante: menganito
+Output esperado:
+    Error: student not found
+
+------------- PROBLEM 4 -------------
+Caso 3: BORDE (input vacío)
+Input:
+    Estudiante: 
+Output esperado:
+    Error: invalid input
+"""
 ### --------------------------------------------------
 ### 7.5 Problem 5: Word frequency counter (list + dict)
 ### --------------------------------------------------
@@ -241,7 +423,34 @@ else:
         print("Frequencies:", freq_dict)
         print("Most common word:", most_common_word)
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE, ERROR)
+# ------------------------------------------------------------
+"""
+------------- PROBLEM 5 -------------
+Caso 1: NORMAL
+Input:
+    Oración: Hola hola, hola mundo.
+Output esperado:
+    Words list: ['hola', 'hola', 'hola', 'mundo']
+    Frequencies: {'hola': 3, 'mundo': 1}
+    Most common word: hola
 
+------------- PROBLEM 5 -------------
+Caso 2: ERROR (input vacío)
+Input:
+    Oración: 
+Output esperado:
+    Error: invalid input
+
+------------- PROBLEM 5 -------------
+Caso 3: BORDE (oración con solo comas/puntos → sin palabras)
+Input:
+    Oración: ,,, ...
+Output esperado:
+    Error: no words found
+
+"""
 ### --------------------------------------------------
 ### 7.6 Problem 6: Simple contact book (dictionary CRUD)
 ### --------------------------------------------------
@@ -314,3 +523,59 @@ else:
             else:
                 print("Error: contact not found")
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA (NORMAL, BORDE, ERROR)
+# ------------------------------------------------------------
+"""
+------------- PROBLEM 6 -------------
+
+Caso 1: NORMAL (ADD)
+Input:
+    Acción (ADD, SEARCH, DELETE): ADD
+    Nombre: Daniel
+    Teléfono: 1112223333
+Output esperado:
+    Contact saved: Daniel 1112223333
+
+
+------------- PROBLEM 6 -------------
+
+Caso 2: ERROR (acción inválida)
+Input:
+    Acción (ADD, SEARCH, DELETE): UPDATE
+Output esperado:
+    Error: invalid action
+
+
+------------- PROBLEM 6 -------------
+
+Caso 3: BORDE (SEARCH con nombre vacío)
+Input:
+    Acción (ADD, SEARCH, DELETE): SEARCH
+    Nombre: 
+Output esperado:
+    Error: invalid input
+
+"""
+# -------------------------------------------------------------------------
+#### CONCLUSIONES
+"""
+- Las listas son convenientes cuando necesito una colección flexible 
+donde pueda agregar o eliminar elementos fácilmente.
+
+- Las tuplas resultan útiles cuando quiero asegurar que ciertos datos permanezcan fijos y no se modifiquen accidentalmente.
+- Los diccionarios destacan cuando necesito buscar información rápidamente usando claves en lugar de índices numéricos.
+
+Al trabajar con estas estructuras noté patrones comunes, como usar diccionarios que contienen listas 
+para agrupar datos relacionados.
+También observé que cada estructura resuelve diferentes necesidades: flexibilidad, estabilidad o acceso eficiente.
+Elegir la estructura correcta hace que el manejo de datos sea más claro, organizado y eficiente en cada problema.
+"""
+#### REFERENCIAS
+"""
+1) Python documentation - Built-in Types: list, tuple, dict 
+2) “Lists vs Tuples in Python” — comparación clara entre list y tuple 
+3) “Python Data Structures: Lists, Dictionaries, Sets, Tuples” — visión general de estructuras en Python 
+4) Tutorial “¿Qué son las listas, tuplas y diccionarios en Python?” (sitio Pontia) 
+5) Artículo “Cómo usar listas, diccionarios, tuplas y sets en Python” — explicación sencilla y práctica 
+"""

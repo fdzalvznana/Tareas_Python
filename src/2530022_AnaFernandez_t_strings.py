@@ -1,3 +1,22 @@
+#### PORTADA
+"""
+Ana Fernanda Sofia Fernandez Alvarez
+2530022
+IM 1-1
+"""
+#### RESUMEN
+"""
+Un string en Python es un tipo de dato que representa texto y es inmutable, 
+lo que significa que no puede modificarse después de crearse. 
+Permite operaciones como concatenar, medir longitud, extraer subcadenas, 
+buscar patrones y reemplazar texto. 
+
+Validar y normalizar la entrada es importante para evitar errores, 
+mantener consistencia y asegurar datos correctos (como correos o contraseñas). 
+El documento describirá cada problema, sus entradas y salidas, 
+las validaciones aplicadas y el uso de métodos de string mostrando 
+además casos de prueba y el código correspondiente.
+"""
 #### PROBLEMAS
 ### --------------------------------------------------
 ### 7.1 Problem 1: Full name formatter (name + initials)
@@ -38,6 +57,37 @@ else:
     print(f"Initials: {result}.")
 
 print()
+# -----------------------------------------
+# CASOS DE PRUEBA:
+# -----------------------------------------
+"""
+1) Caso NORMAL
+Entrada:
+Tell me your name: Ana Maria Lopez
+
+Salida esperada:
+Formatted name: Ana Maria Lopez
+Initials: A. M. L.
+
+-----------------------------------------
+
+2) Caso BORDE (válido, pero mínimo)
+Entrada:
+Tell me your name: Juan Perez
+
+Salida esperada:
+Formatted name: Juan Perez
+Initials: J. P.
+
+-----------------------------------------
+
+3) Caso ERROR (solo una palabra)
+Entrada:
+Tell me your name: Madonna
+
+Salida esperada:
+At least a first and last name.
+"""
 
 ### --------------------------------------------------
 ### 7.2 Problem 2: Simple email validator (structure + domain)
@@ -56,32 +106,51 @@ Si el correo es válido, también muestra el dominio (la parte después de '@').
 # find: Devuelve la posición donde aparece por primera vez
 
 print(f"\n ------------- PROBLEM 2 -------------")
-email_input = input(f"Tell me your email: ")
-email_splited = email_input.split()
-at_text = email_input.find("@")
-final = email_input[at_text:]
-dot_valid = final.find(".")
 
-# Valida si hay o no espacios
-if len(email_splited) > 1:
-    print("No debe de haber espacios") 
+email_input = input("Tell me your email: ")
+email = email_input.strip()
+email_parts = email.split()
 
-# Valida si hay o no un arroba
-elif at_text == -1:
-    print(f"@ inexistente")
-
-# Valida si hay solo 1 arroba
-elif email_input.count("@") > 1:
+at_pos = email.find("@")
+dot_pos = email.rfind(".")   
+count_at = email.count("@")
+if len(email_parts) > 1:
+    print("No debe de haber espacios")
+elif at_pos == -1:
+    print("@ inexistente")
+elif count_at != 1:
     print("Debe haber solo un arroba")
-
-# Valida si hay solo 1 punto
-elif dot_valid == -1:
-    print("Debe tener al menos un '.'")
+elif dot_pos == -1 or dot_pos < at_pos:
+    print("Debe tener al menos un '.' después del @")
 else:
+    dominio = email[at_pos:]
     print("Your email is valid")
-    print(f"Dominion: {final}")
+    print(f"Dominion: {dominio}")
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA:
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       user@example.com
+   Salida esperada:
+       Your email is valid
+       Dominion: @example.com
 
+2) Caso Borde (válido pero mínimo)
+   Entrada:
+       a@b.co
+   Salida esperada:
+       Your email is valid
+       Dominion: @b.co
+
+3) Caso Error (espacios)
+   Entrada:
+       user name@example.com
+   Salida esperada:
+       No debe de haber espacios
+"""
 ### --------------------------------------------------
 ### 7.3 Problem 3: Palindrome checker (ignoring spaces and case)
 ### --------------------------------------------------
@@ -113,7 +182,35 @@ else:
     is_palindrome = False
     print(f"Is not a palindrome: {is_palindrome}")
 print()
+# ------------------------------------------------------------
+#   CASOS DE PRUEBA:
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       Ana
+   Proceso:
+       lower + strip + sin espacios → "ana"
+       reversa → "ana"
+   Salida esperada:
+       Normalized Phrase: ana
+       Is a palindrome: True
 
+2) Caso Borde (válido justo en 3 caracteres)
+   Entrada:
+       oso
+   Proceso:
+       "oso" == "oso" invertido
+   Salida esperada:
+       Normalized Phrase: oso
+       Is a palindrome: True
+
+3) Caso Error (menos de 3 caracteres)
+   Entrada:
+       a
+   Salida esperada:
+       Your phrase/word must be at least 3 characters long
+"""
 ### --------------------------------------------------
 ### 7.4 Problem 4: Sentence word stats (lengths and first/last word)
 ### --------------------------------------------------
@@ -150,7 +247,41 @@ else:
     print(f"Longest word: {longest_word}")
     print(f"Shortest word: {shortest_word}")
     print()
+# ------------------------------------------------------------
+#   CASOS DE PRUEBA:
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       Enter sentence: Hola este es un ejemplo
+   Procesamiento:
+       phrase_list = ["Hola", "este", "es", "un", "ejemplo"]
+   Salida esperada:
+       Total number of words: 5
+       First word in sentence: Hola
+       Last word in sentence: ejemplo
+       Longest word: ejemplo
+       Shortest word: es
 
+2) Caso Borde (solo una palabra)
+   Entrada:
+       Enter sentence: Hola
+   Procesamiento:
+       phrase_list = ["Hola"]
+   Salida esperada:
+       Total number of words: 1
+       First word in sentence: Hola
+       Last word in sentence: Hola
+       Longest word: Hola
+       Shortest word: Hola
+
+3) Caso Error (cadena vacía)
+   Entrada:
+       Enter sentence: 
+       (solo presiona Enter)
+   Salida esperada:
+       Character not found
+"""
 ### --------------------------------------------------
 ### 7.5 Problem 5: Password strength classifier
 ### --------------------------------------------------
@@ -202,10 +333,40 @@ elif len(password_input) < 8 or any(verify_all) == True:
 
 elif len(password_input) >= 8 and any(verify_list) == True:
   print("Medium")
-
-
 print()
+# ------------------------------------------------------------
+# CASOS DE PRUEBA:
+# ------------------------------------------------------------
+"""
+1) Caso Normal (Strong)
+   Entrada:
+       Set a password to evalue: Abc!2345
+   Análisis:
+       - Tiene mayúscula, minúscula, dígito y símbolo.
+       - Longitud >= 8
+       - all(verify_list) == True
+   Salida esperada:
+       Strong
 
+2) Caso Borde (Medium)
+   Entrada:
+       Set a password to evalue: Abcdefgh
+   Análisis:
+       - Longitud >= 8
+       - Tiene mayúscula o minúscula, pero NO tiene dígito Y símbolo
+       - No cumple all(verify_list), pero sí any(verify_list)
+   Salida esperada:
+       Medium
+
+3) Caso Error / Débil (Weak)
+   Entrada:
+       Set a password to evalue: 12345
+   Análisis:
+       - Longitud < 8 → condición directa de Weak
+       - Además, all_digit == True → también Weak
+   Salida esperada:
+       Weak
+"""
 ### --------------------------------------------------
 ### 7.6 Problem 6: Product label formatter (fixed-width text)
 ### --------------------------------------------------
@@ -237,3 +398,64 @@ else:
     normalized_name = normalized_name[:30]
 
 print(f"Product: {normalized_name.title()} | Price: ${price_value}")
+# ------------------------------------------------------------
+# CASOS DE PRUEBA:
+# ------------------------------------------------------------
+"""
+1) Caso Normal
+   Entrada:
+       Product name: chocolate bar
+       Product price: 25
+   Análisis:
+       - Nombre con longitud < 30 → se rellena con espacios (ljust)
+       - Se imprime capitalizado con .title()
+   Salida esperada:
+       Product: Chocolate Bar               | Price: $25
+
+2) Caso Borde (exactamente 30 caracteres)
+   Entrada:
+       Product name: abcdefghijklmnopqrstuvwx1234
+       (30 caracteres exactos)
+       Product price: 50
+   Análisis:
+       - Nombre ya es 30 chars → no se rellena ni se corta
+   Salida esperada:
+       Product: Abcdefghijklmnopqrstuvwx1234 | Price: $50
+
+3) Caso Error / Límite (nombre demasiado largo)
+   Entrada:
+       Product name: SuperUltraMegaHyperMaxProductName123
+       Product price: 100
+   Análisis:
+       - Más de 30 caracteres → se recorta a los primeros 30
+   Salida esperada:
+       Product: Superultramegahypermaxproduc | Price: $100
+"""
+# -------------------------------------------------------------------------
+#### CONCLUSIONES
+"""
+El manejo de strings es fundamental porque casi toda entrada y salida de datos
+en un programa depende de texto que debe procesarse correctamente.
+
+Funciones como lower(), strip() y split() son útiles para limpiar, normalizar
+y estructurar la información antes de usarla, mientras que join() permite
+reconstruir texto de forma controlada.  
+Normalizar el texto evita errores al comparar datos, especialmente en nombres,
+correos o contraseñas. 
+
+Las validaciones ayudan a prevenir datos basura y a
+mantener la integridad del sistema. Además, comprender que los strings son
+inmutables y usar slices eficientemente permite manipular texto de manera
+segura y predecible dentro de los programas.
+"""
+#### REFERENCIAS
+"""
+1) Python Documentation - Built-in Types: Text Sequence Type — str
+   https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str
+2) Python Tutorial - Strings
+  https://docs.python.org/3/tutorial/introduction.html#strings
+3) Sweigart, A. (2019). *Automate the Boring Stuff with Python* - Sección sobre manejo de texto.
+4) Cormen, Leiserson, Rivest & Stein. *Introduction to Algorithms* - Conceptos básicos de procesamiento de cadenas.
+5) Real Python - “Working With Strings in Python”
+   https://realpython.com/python-strings/
+"""
